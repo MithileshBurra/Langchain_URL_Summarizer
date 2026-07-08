@@ -1,4 +1,4 @@
-name: Sync to Hugging Face hub
+name: Push to Hugging Face Spaces
 on:
   push:
     branches: [main]
@@ -15,4 +15,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://MithileshBurra:$HF_TOKEN@huggingface.co/spaces/MithileshBurra/URL_Summarizer main
+        run: git push --force https://user:$HF_TOKEN@huggingface.co/spaces/MithileshBurra/URL_Summarizer main
