@@ -4,6 +4,8 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_classic.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import YoutubeLoader,UnstructuredURLLoader
+import httpx
+import certifi
 from youtube_transcript_api import YouTubeTranscriptApi
 from langchain_core.documents import Document
 
@@ -24,7 +26,8 @@ def load_youtube_url(url):
         video_id = url.split("youtu.be" )[-1].split("?")[0]
     else:
         raise ValueError("Could not extract YouTube video ID from URL")
-    ytt_api = YouTubeTranscriptApi()  # instantiate first
+    http_client = httpx.Client(verify=certifi.where()) 
+    ytt_api = YouTubeTranscriptApi()  
     transcript = ytt_api.fetch(video_id)
     full_text = " ".join(entry.text for entry in transcript)
     return [Document(page_content = full_text)]

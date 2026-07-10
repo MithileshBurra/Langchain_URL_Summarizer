@@ -9,3 +9,5 @@ unstructured
 python_dotenv
 ipykernel
 transformers
+certifi
+httpx
