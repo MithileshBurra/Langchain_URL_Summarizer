@@ -1,11 +1,16 @@
-import streamlit as st 
+import streamlit as st
+import os
+import certifi
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
+os.environ['REQUESTS_CA_BUNDLE'] = certifi.where() 
+import httpx
 import validators 
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_classic.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import YoutubeLoader,UnstructuredURLLoader
-import httpx
-import certifi
+
 from youtube_transcript_api import YouTubeTranscriptApi
 from langchain_core.documents import Document
 ##
